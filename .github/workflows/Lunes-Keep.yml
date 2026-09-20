@@ -72,3 +72,11 @@ jobs:
           delete_workflow_pattern: ${{ github.workflow }}
           retain_days: 0
           keep_minimum_runs: 3
+
+          # 添加自动续命步骤
+      - name: Keepalive Workflow
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit --allow-empty -m "Chore: Keep-alive [skip ci]"
+          git push || echo "No changes to push"
